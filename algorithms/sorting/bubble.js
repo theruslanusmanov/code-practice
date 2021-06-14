@@ -27,3 +27,24 @@ bubbleSort(ar)
 // Array after sort
 console.log('-----after sorting-----')
 console.log(ar)
+
+function alternativeBubbleSort(arr) {
+  let swapped = true
+  while (swapped) {
+    swapped = false
+    for (let i = 0; i < arr.length - 1; i++) {
+      if (arr[i] > arr[i + 1]) {
+        [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]]
+        swapped = true
+      }
+    }
+  }
+  return arr
+}
+
+// test
+console.log('-----before sorting-----')
+var array = [10, 5, 3, 8, 2, 6, 4, 7, 9, 1]
+console.log(array)
+console.log('-----after sorting-----')
+console.log(alternativeBubbleSort(array))
