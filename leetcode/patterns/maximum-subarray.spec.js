@@ -1,0 +1,28 @@
+const maxSubArray = require('./maximum-subarray');
+
+describe('#maxSubArray', () => {
+  /**
+   * Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
+   * Output: 6
+   * Explanation: [4,-1,2,1] has the largest sum = 6.
+   */
+  it('should return 6', () => {
+    expect(maxSubArray([-2,1,-3,4,-1,2,1,-5,4])).toBe(6)
+  })
+
+  /**
+   * Input: nums = [1]
+   * Output: 1
+   */
+  it('should return 1', () => {
+    expect(maxSubArray([1])).toBe(1)
+  })
+
+  /**
+   * Input: nums = [5,4,-1,7,8]
+   * Output: 23
+   */
+  it('should return 23', () => {
+    expect(maxSubArray([5,4,-1,7,8])).toBe(23)
+  })
+})
