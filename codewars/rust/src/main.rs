@@ -9,52 +9,37 @@
     `
 **/
 fn main() {
-    let result = valid_braces("(){}[]");
+    let result = valid_braces2("(){}[]");
     println!("{}", result);
 }
 
 fn valid_braces(s: &str) -> bool {
     println!("{}", s);
 
-    let mut opening_braces = Vec::new();
-    let mut closing_braces = Vec::new();
+    let mut stack = Vec::new();
 
     for c in s.chars() {
-        match c {
-            '{' | '(' | '[' => opening_braces.push(c),
-            '}' | ')' | ']' => closing_braces.push(c),
-            _ => {}
+        if stack.len() > 0 {
+            if stack.last() == Some(&'(') && c == ')' {
+                stack.pop();
+                continue;
+            }
+            if stack.last() == Some(&'{') && c == '}' {
+                stack.pop();
+                continue;
+            }
+            if stack.last() == Some(&'[') && c == ']' {
+                stack.pop();
+                continue;
+            }
         }
+
+        stack.push(c);
     }
 
-    closing_braces.reverse();
+    println!("{:?}", stack);
 
-    println!("{:?}", opening_braces);
-    println!("{:?}", closing_braces);
-
-    if opening_braces.len() != closing_braces.len() {
-        return false;
-    }
-
-    let mut count: i32 = 0;
-
-
-    for it in opening_braces.iter().zip(closing_braces.iter()) {
-        match it {
-            ('{', '}') => {
-                count += 1;
-            },
-            ('(', ')') => {
-                count += 1;
-            },
-            ('[', ']') => {
-                count += 1;
-            },
-            (_, _) => count -= 1
-        }
-    }
-
-    if count == opening_braces.len() as i32 {
+    if stack.len() == 0 {
         return true;
     }
 
