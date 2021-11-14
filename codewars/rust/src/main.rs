@@ -9,8 +9,8 @@
     `
 **/
 fn main() {
-    println!("Hello, world!");
-    valid_braces("(){}[]");
+    let result = valid_braces("(){}[]");
+    println!("{}", result);
 }
 
 fn valid_braces(s: &str) -> bool {
@@ -27,11 +27,35 @@ fn valid_braces(s: &str) -> bool {
         }
     }
 
+    closing_braces.reverse();
+
     println!("{:?}", opening_braces);
     println!("{:?}", closing_braces);
 
     if opening_braces.len() != closing_braces.len() {
-        false
+        return false;
+    }
+
+    let mut count: i32 = 0;
+
+
+    for it in opening_braces.iter().zip(closing_braces.iter()) {
+        match it {
+            ('{', '}') => {
+                count += 1;
+            },
+            ('(', ')') => {
+                count += 1;
+            },
+            ('[', ']') => {
+                count += 1;
+            },
+            (_, _) => count -= 1
+        }
+    }
+
+    if count == opening_braces.len() as i32 {
+        return true;
     }
 
     false
