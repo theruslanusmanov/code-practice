@@ -1,3 +1,14 @@
+///
+/// Kata link: https://www.codewars.com/kata/5277c8a221e209d3f6000b56/train/rust
+///
+/// # Examples:
+/// ```
+///   "(){}[]"   =>  True
+///   "([{}])"   =>  True
+///   "(}"       =>  False
+///   "[(])"     =>  False
+///   "[({})](]" =>  False
+/// ```
 pub fn valid_braces(s: &str) -> bool {
     let mut stack = Vec::new();
 
@@ -27,3 +38,18 @@ pub fn valid_braces(s: &str) -> bool {
     false
 }
 
+#[cfg(test)]
+mod tests {
+    use super::valid_braces;
+
+    #[test]
+    fn exploration() {
+        assert_eq!(2 + 2, 4);
+    }
+
+    #[test]
+    fn basic_tests() {
+        assert_eq!(valid_braces("()"), true);
+        assert_eq!(valid_braces("[(])"), false);
+    }
+}
