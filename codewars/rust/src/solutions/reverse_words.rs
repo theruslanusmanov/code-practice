@@ -5,15 +5,10 @@
 ///   "The greatest victory is that which requires no battle" --> "battle no requires which that is victory greatest The"
 /// ```
 pub fn reverse_words(words: &str) -> String {
-    // 1. Split string into words.
-    let split_words = words.split(' ');
-    for s in split_words {
-        println!("{}", s);
-        // 2. Reverse each word.
-        s.chars().rev().collect::<String>();
-    }
-
-    words.to_string()
+    let mut iter = words.split(' ').rev();
+    std::iter::once(iter.next())
+        .chain(iter.flat_map(|word| [" ", word]))
+        .collect()
 }
 
 
