@@ -1,4 +1,3 @@
-///
 /// Kata link: https://www.codewars.com/kata/5277c8a221e209d3f6000b56/train/rust
 ///
 /// # Examples:
@@ -9,6 +8,7 @@
 ///   "[(])"     =>  False
 ///   "[({})](]" =>  False
 /// ```
+#[allow(dead_code)]
 pub fn valid_braces(s: &str) -> bool {
     let mut stack = Vec::new();
 

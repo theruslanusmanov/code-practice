@@ -1,7 +1,7 @@
 mod solutions;
 
-use solutions::valid_braces::valid_braces;
+use solutions::reverse_words::reverse_words;
 
 fn main() {
-    valid_braces("(){}[]");
+    reverse_words("The greatest victory is that which requires no battle");
 }
