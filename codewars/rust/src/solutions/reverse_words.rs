@@ -1,4 +1,4 @@
-/// Kata link: https://www.codewars.com/kata/51c8991dee245d7ddf00000e/train/rust
+/*/// Kata link: https://www.codewars.com/kata/51c8991dee245d7ddf00000e/train/rust
 ///
 /// # Examples:
 /// ```
@@ -22,4 +22,4 @@ mod tests {
         let reversed_str = "battle no requires which that is victory greatest The";
         assert_eq!(reverse_words(str), reversed_str);
     }
-}
+}*/

@@ -8,14 +8,19 @@
 pub fn get_count(string: &str) -> usize {
     let mut vowels_count: usize = 0;
 
-    // Do your magic here
+    for s in string.chars() {
+        match s {
+            'a' | 'e' | 'i' | 'o' | 'u' => vowels_count += 1,
+            _ => {}
+        }
+    }
 
     vowels_count
 }
 
 #[cfg(test)]
 mod tests {
-    use super::get_count;
+    use crate::solutions::vowels_count::get_count;
 
     #[test]
     fn my_tests() {
