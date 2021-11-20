@@ -1,6 +1,6 @@
 const cache = require('./carrying-partial-func');
 
-describe("curryPartial tests", function() {
+xdescribe("curryPartial tests", function() {
 
   it("Function with three random parameters", function() {
 
