@@ -2,13 +2,14 @@
  * Kata link: https://www.codewars.com/kata/52b7ed099cdc285c300001cd/train/javascript
  */
 function sumIntervals(intervals) {
-    let sum = 0;
-    intervals.forEach(interval => {
-        console.log(interval)
-        sum += interval[1] - interval[0];
-    })
-
-    return sum;
+    let sum = [];
+    intervals.forEach(e => {
+        for (let i = e[0]; i < e[1]; i++) {
+            sum.push(i);
+        }
+    });
+    sum = [...new Set(sum)]
+    return sum.length;
 }
 
 module.exports = sumIntervals;
