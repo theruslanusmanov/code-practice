@@ -1,7 +1,7 @@
 function insertionSort(a) {
     for (let j = 2; j < a.length; j++) {
         const key = a[j];
-        i = j - 1;
+        let i = j - 1;
         while (i > 0 && a[i] > key) {
             a[i + 1] = a[i];
             i = i - 1;
