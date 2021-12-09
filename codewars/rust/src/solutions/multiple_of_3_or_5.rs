@@ -8,10 +8,15 @@ fn multiple_of_3_or_5(num: i32) -> i32 {
     }
 
     for i in 1..num {
-        dividable_nums.push(i);
+        if i % 3 == 0 || i % 5 == 0 {
+            dividable_nums.push(i);
+        }
     }
 
-    println!("{:?}", dividable_nums);
+    sum = dividable_nums.iter().sum();
+
+    println!("Dividable nums: {:?}", dividable_nums);
+    println!("Summary: {}", sum);
 
     sum
 }
