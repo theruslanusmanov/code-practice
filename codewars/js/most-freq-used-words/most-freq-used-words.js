@@ -1,7 +1,7 @@
 // https://www.codewars.com/kata/51e056fe544cf36c410000fb/train/javascript
 
 function topThreeWords(text) {
-  const splitString = text.toLowerCase().trim().split(/\s+/);
+  const splitString = text.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"").toLowerCase().trim().split(/\s+/);
   const setString = new Set(splitString);
   const mapString = new Map(setString.entries());
 
@@ -17,8 +17,6 @@ function topThreeWords(text) {
     });
   });
 
-  console.log(mapString);
-
   const result = new Map(
     [...mapString.entries()]
       .sort((a, b) => {
@@ -28,9 +26,8 @@ function topThreeWords(text) {
       })
       .slice(0, 3)
   );
-  console.log([...result.keys()]);
 
-  return [...result.keys()];
+  return [...result.keys()].filter(v => v !== '\'' && v);
 }
 
 module.exports = topThreeWords;
