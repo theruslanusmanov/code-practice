@@ -5,3 +5,4 @@ pub mod valid_braces;
 pub mod vowels_count;
 pub mod sort_numbers;
 pub mod digitize;
+pub mod snail;
