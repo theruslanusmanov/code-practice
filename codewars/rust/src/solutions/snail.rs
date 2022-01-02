@@ -1,19 +1,21 @@
 // https://www.codewars.com/kata/521c2db8ddc89b9b7a0000c1/train/rust
 
 
-fn snail(matrix: &[Vec<i32>]) -> Vec<i32> {
-    let mut matrixClone = matrix.clone();
-    let mut finalArray: Vec<i32> = vec![];
-    while matrixClone.len() > 0 {
-        let el: i32 = *matrixClone.get(0).unwrap().get(0).unwrap();
-        finalArray.push(el)
-        *matrixClone.get(0).unwrap().remove(0);
+fn one_layer(n: usize, layer: usize) -> impl Iterator<Item = (usize, usize)> {
+    let left_right = (layer..n - layer).map(move |i| (layer, i));
+    let up_down = (layer + 1..n - layer).map(move |i| (i, n - 1 - layer));
+    let right_left = (layer..n - 1 - layer).rev().map(move |i| (n - 1 - layer, i));
+    let down_up = (layer + 1..n - 1 - layer).rev().map(move |i| (i, layer));
 
-        matrixClone.iter().map(|mut row| finalArray.push(row.pop().unwrap()));
-        matrixClone.reverse();
-        matrixClone.iter().map(|mut row| row.reverse())
-    }
-    finalArray
+    left_right.chain(up_down).chain(right_left).chain(down_up)
+}
+
+pub fn snail(matrix: &[Vec<i32>]) -> Vec<i32> {
+    let n = matrix.get(0).map(|xs| xs.len()).unwrap_or(0);
+    (0..n)
+        .flat_map(|x| one_layer(n, x))
+        .map(|(x, y)| matrix[x][y])
+        .collect()
 }
 
 #[cfg(test)]
