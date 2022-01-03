@@ -30,8 +30,7 @@ export function countingSort(input, k = input.length) {
 
   const output = [];
   for (let i = input.length - 1; i >= 0; i--) {
-    count[i] -= 1;
-    output.push(input[i]);
+    output[i] = count[i]--;
   }
 
   return output;
