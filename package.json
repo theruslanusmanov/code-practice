@@ -6,6 +6,7 @@
   "author": "Ruslan Usmanov <ruslanusm6@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^27.0.5"
+    "jest": "^27.0.5",
+    "jest-esm-transformer": "^1.0.0"
   }
 }
