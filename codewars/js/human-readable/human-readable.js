@@ -9,7 +9,7 @@ export function humanReadable (seconds) {
   let secondsRest = seconds;
   const hours = (Math.trunc((secondsRest / (60 * 60)))).toLocaleString('en-US', {minimumIntegerDigits: 2});
   secondsRest -= hours * 60 * 60;
-  const minutes = (Math.trunc(secondsRest / 60)).toLocaleString('en-US', {minimumIntegerDigits: 2});;
-  secondsRest = (secondsRest - minutes * 60).toLocaleString('en-US', {minimumIntegerDigits: 2});;
+  const minutes = (Math.trunc(secondsRest / 60)).toLocaleString('en-US', {minimumIntegerDigits: 2});
+  secondsRest = (secondsRest - minutes * 60).toLocaleString('en-US', {minimumIntegerDigits: 2});
   return `${hours}:${minutes}:${secondsRest}`;
 }
