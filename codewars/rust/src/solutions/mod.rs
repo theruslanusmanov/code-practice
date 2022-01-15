@@ -6,3 +6,4 @@ pub mod vowels_count;
 pub mod sort_numbers;
 pub mod digitize;
 pub mod snail;
+pub mod split_strings;
