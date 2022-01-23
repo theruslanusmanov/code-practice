@@ -15,4 +15,9 @@ describe('calculate', function () {
     const s = "(1+(4+5+2)-3)+(6+8)";
     expect(calculate(s)).toBe(23);
   })
+
+  it('should equal', () => {
+    const s = " 30";
+    expect(calculate(s)).toBe(30);
+  })
 });
