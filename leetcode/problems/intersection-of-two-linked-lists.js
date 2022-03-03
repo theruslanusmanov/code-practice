@@ -4,13 +4,14 @@
  * @param {ListNode} headB
  * @return {ListNode}
  */
-export const getIntersectionNode = function(headA, headB) {
+export const getIntersectionNode = function (headA, headB) {
   if (!headA || !headB) {
     return null;
   }
 
   let head1 = headA;
   let head2 = headB;
+
   while (head1 !== head2) {
     head1 = head1.next;
     head2 = head2.next;
