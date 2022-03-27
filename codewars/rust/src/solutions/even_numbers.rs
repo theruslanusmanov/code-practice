@@ -1,5 +1,6 @@
 fn even_numbers(array: &Vec<i32>, number: usize) -> Vec<i32> {
-    // Good luck!
+    let even: Vec<_> = array.iter().cloned().filter(|&n| n % 2 == 0).collect();
+    even[even.len() - number ..].to_vec()
 }
 
 #[cfg(test)]
