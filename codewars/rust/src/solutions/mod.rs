@@ -9,3 +9,4 @@ pub mod snail;
 pub mod split_strings;
 pub mod count_sheep;
 pub mod repeater;
+pub mod even_numbers;
