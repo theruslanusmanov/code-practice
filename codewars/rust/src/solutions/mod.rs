@@ -11,3 +11,4 @@ pub mod count_sheep;
 pub mod repeater;
 pub mod even_numbers;
 pub mod seven;
+pub mod ones_and_zeros;
