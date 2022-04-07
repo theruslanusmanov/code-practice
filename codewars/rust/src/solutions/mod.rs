@@ -12,3 +12,4 @@ pub mod repeater;
 pub mod even_numbers;
 pub mod seven;
 pub mod ones_and_zeros;
+pub mod looking_for_a_benefactor;
