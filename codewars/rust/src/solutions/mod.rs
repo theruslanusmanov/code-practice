@@ -14,3 +14,4 @@ pub mod seven;
 pub mod ones_and_zeros;
 pub mod looking_for_a_benefactor;
 pub mod evens_and_odds;
+pub mod word_values;
