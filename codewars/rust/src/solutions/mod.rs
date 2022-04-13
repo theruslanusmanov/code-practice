@@ -16,3 +16,5 @@ pub mod looking_for_a_benefactor;
 pub mod evens_and_odds;
 pub mod word_values;
 pub mod range_extraction;
+pub mod convert_a_boolean_to_a_string;
+pub mod shortest_word;
