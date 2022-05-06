@@ -6,8 +6,10 @@
       <sourceFolder url="file://$MODULE_DIR$/codewars/rust/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/codewars/rust/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/codewars/rust/solutions/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/leetcode/rust/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/codewars/rust/target" />
       <excludeFolder url="file://$MODULE_DIR$/codewars/rust/solutions/target" />
+      <excludeFolder url="file://$MODULE_DIR$/leetcode/rust/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
