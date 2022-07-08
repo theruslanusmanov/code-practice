@@ -172,3 +172,186 @@ var nextPermutation = function(N) {
     swap(i, j);
   }
 };
+
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var search = function(nums, target) {
+  let left = 0;
+  let right = nums.length - 1;
+
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+
+    if (nums[mid] === target) {
+      return mid;
+    }
+
+    // When dividing the roated array into two halves, one must be sorted.
+
+    // Check if the left side is sorted
+    if (nums[left] <= nums[mid]) {
+      if (nums[left] <= target && target <= nums[mid]) {
+        // target is in the left
+        right = mid - 1;
+
+      } else {
+        // target is in the right
+        left = mid + 1;
+      }
+    }
+
+    // Otherwise, the right side is sorted
+    else {
+      if (nums[mid] <= target && target <= nums[right]) {
+        // target is in the right
+        left = mid + 1;
+
+      } else {
+        // target is in the left
+        right = mid - 1;
+      }
+    }
+
+  }
+
+  return -1;
+};
+
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var searchRange = function(N, T) {
+  const find = (target, arr, left = 0, right = arr.length) => {
+    while (left <= right) {
+      let mid = left + right >> 1;
+      if (arr[mid] < target) left = mid + 1;
+      else right = mid - 1;
+    }
+
+    return left;
+  };
+  let Tleft = find(T, N);
+  if (N[Tleft] !== T) return [-1, -1];
+  return [Tleft, find(T + 1, N, Tleft) - 1];
+};
+
+/**
+ * @param {character[][]} board
+ * @return {boolean}
+ */
+var isValidSudoku = function(board) {
+  for (let i = 0; i < 9; i++) {
+    let row = new Set(),
+      col = new Set(),
+      box = new Set();
+
+    for (let j = 0; j < 9; j++) {
+      let _row = board[i][j];
+      let _col = board[j][i];
+      let _box = board[3 * Math.floor(i / 3) + Math.floor(j / 3)][3 * (i % 3) +
+      (j % 3)];
+
+      if (_row != '.') {
+        if (row.has(_row)) return false;
+        row.add(_row);
+      }
+      if (_col != '.') {
+        if (col.has(_col)) return false;
+        col.add(_col);
+      }
+
+      if (_box != '.') {
+        if (box.has(_box)) return false;
+        box.add(_box);
+      }
+    }
+  }
+  return true;
+};
+
+/**
+ * @param {number} n
+ * @return {string}
+ */
+var countAndSay = function(n) {
+  var str = '1';
+  for (var i = 1; i < n; i++) {
+    var strArray = str.split('');
+    str = '';
+    var count = 1;
+    // Loop through current nth level line
+    for (var j = 0; j < strArray.length; j++) {
+      // Next digit is different
+      if (strArray[j] !== strArray[j + 1]) {
+        // Go to next non-matching digit
+        str += count + strArray[j];
+        count = 1;
+      } else {
+        count++;
+      }
+    }
+  }
+  return str;
+};
+
+/**
+ * @param {number[]} houses
+ * @param {number[][]} cost
+ * @param {number} m
+ * @param {number} n
+ * @param {number} target
+ * @return {number}
+ */
+var minCost = function(houses, cost, m, n, target) {
+  const cache = {};
+  const backtrack = (prevColor, house, numNeighborhoods) => {
+    // return if we have too many neighborhoods
+    if (numNeighborhoods > target) return Infinity;
+
+    // if we have painted all the houses
+    // return 0 if we have the correct number of neighborhoods
+    // otherwise return maximum value
+    if (house === m) {
+      return numNeighborhoods === target ? 0 : Infinity;
+    }
+
+    // if we have already seen this combination, return the result
+    const key = [prevColor, house, numNeighborhoods].join('-');
+    if (cache.hasOwnProperty(key)) return cache[key];
+
+    // case if house is already painted
+    if (houses[house]) {
+      // see if we have a new neighborhood
+      const additionalNeighborhoods = houses[house] !== prevColor ? 1 : 0;
+      return cache[key] = backtrack(houses[house], house + 1,
+        numNeighborhoods + additionalNeighborhoods);
+    }
+
+    let min = Infinity;
+    for (let color = 0; color < n; color++) {
+      // paint the house this color (offset by 1)
+      houses[house] = color + 1;
+      // see if we have a new neighborhood
+      const additionalNeighborhoods = houses[house] !== prevColor ? 1 : 0;
+      // find the minimum price to paint all other houses with this combination
+      const res = backtrack(houses[house], house + 1,
+        numNeighborhoods + additionalNeighborhoods);
+      // price to pain the house this color
+      const price = cost[house][color];
+      min = Math.min(min, price + res);
+      // remove the paint
+      houses[house] = 0;
+    }
+    return cache[key] = min;
+  };
+
+  // Backtrack through all the different possibilities
+  // if the result is max value, return -1;
+  const result = backtrack(-1, 0, 0);
+  return result === Infinity ? -1 : result;
+};
