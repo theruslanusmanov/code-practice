@@ -355,3 +355,97 @@ var minCost = function(houses, cost, m, n, target) {
   const result = backtrack(-1, 0, 0);
   return result === Infinity ? -1 : result;
 };
+
+/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+var countPaths = function(grid) {
+  let m = grid.length, n = grid[0].length, mod = 10 ** 9 + 7;
+  let ans = 0, memo = Array(m).fill(0).map(() => Array(n).fill(-1));
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      ans = (ans + dfs(i, j)) % mod;
+    }
+  }
+  return ans;
+
+  function dfs(i, j) {
+    const directions = [[-1, 0], [0, 1], [1, 0], [0, -1]];
+    if (memo[i][j] !== -1) return memo[i][j];
+    let ans = 1;
+    for (let [x, y] of directions) {
+      let newX = i + x, newY = j + y;
+      if (newX < 0 || newX >= m || newY < 0 || newY >= n || grid[newX][newY] <=
+        grid[i][j]) continue;
+      ans = (ans + dfs(newX, newY)) % mod;
+    }
+    return memo[i][j] = ans;
+  }
+};
+
+/**
+ * @param {number} n
+ * @param {number} delay
+ * @param {number} forget
+ * @return {number}
+ */
+var peopleAwareOfSecret = function(n, delay, forget) {
+  const mod = 1e9 + 7;
+  let dp = Array(n + 1).fill(0), res = 0;
+  dp[1] = 1;
+  for (let d = 2; d <= n; d++) {
+    for (let i = 1; i < d; i++) {
+      if (d - i >= delay && d - i < forget) {
+        dp[d] += dp[i];
+        dp[d] %= mod;
+      }
+    }
+  }
+
+  for (let i = 1; i <= n; i++) {
+    if (n - i < forget) res = (res + dp[i]) % mod;
+  }
+  return res;
+};
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {number} m
+ * @param {number} n
+ * @param {ListNode} head
+ * @return {number[][]}
+ */
+var spiralMatrix = function(m, n, head) {
+  let r = 0, c = 0,
+    dr = 0, dc = 1, // Add column or row.
+    matrix = Array(m).fill(-1).map(_ => Array(n).fill(-1));
+
+  const need2swap = () => (
+    r + dr < 0 || r + dr >= m ||
+    c + dc < 0 || c + dc >= n ||
+    matrix[r + dr][c + dc] !== -1
+  );
+
+  while (head) {
+    matrix[r][c] = head.val;
+
+    if (need2swap()) {
+      const temp = dc;
+      dc = -dr;
+      dr = temp;
+    }
+
+    r += dr;
+    c += dc;
+    head = head.next;
+  }
+
+  return matrix;
+};
