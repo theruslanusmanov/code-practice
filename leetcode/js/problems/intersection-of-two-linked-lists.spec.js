@@ -1,4 +1,4 @@
-import {linkedList} from '../../structures/linked-list';
+import {linkedList} from '../structures/linked-list';
 import {getIntersectionNode} from './intersection-of-two-linked-lists';
 
 describe('Intersection of Two Linked Lists', () => {
