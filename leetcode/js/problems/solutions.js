@@ -456,12 +456,38 @@ var spiralMatrix = function(m, n, head) {
  * @return {number}
  */
 var maxResult = function(nums, k) {
-  let n = nums.length, deq = [n-1]
+  let n = nums.length, deq = [n - 1];
   for (let i = n - 2; ~i; i--) {
-    if (deq[0] - i > k) deq.shift()
-    nums[i] += nums[deq[0]]
-    while (deq.length && nums[deq[deq.length - 1]] <= nums[i]) deq.pop()
-    deq.push(i)
+    if (deq[0] - i > k) deq.shift();
+    nums[i] += nums[deq[0]];
+    while (deq.length && nums[deq[deq.length - 1]] <= nums[i]) deq.pop();
+    deq.push(i);
   }
-  return nums[0]
+  return nums[0];
+};
+
+/**
+ * @param {number[]} candidates
+ * @param {number} target
+ * @return {number[][]}
+ */
+var combinationSum2 = function(candidates, target) {
+  if (!candidates || candidates.length === 0) return [];
+  let res = [];
+  candidates.sort((a, b) => a - b);
+  var helper = function(curSum, cur, index) {
+    if (curSum === target) {
+      res.push([...cur]);
+      return;
+    }
+    for (let i = index; i < candidates.length; i++) {
+      if (i !== index && candidates[i] === candidates[i - 1]) continue;
+      if (curSum > target) return;
+      cur.push(candidates[i]);
+      helper(curSum + candidates[i], cur, i + 1);
+      cur.pop();
+    }
+  };
+  helper(0, [], 0);
+  return res;
 };
