@@ -117,3 +117,5 @@ dist
 .pnp.*
 
 .idea
+!/.idea/js-practice.iml
+!/.idea/misc.xml
