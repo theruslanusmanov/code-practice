@@ -95,3 +95,36 @@ pub fn my_pow(x: f64, n: i32) -> f64 {
         }
     }
 }
+
+pub fn can_jump(nums: Vec<i32>) -> bool {
+    let mut n = 1;
+    for i in (0..nums.len() - 1).rev() {
+        n = if nums[i] < n { n + 1 } else { 1 };
+    }
+    n == 1
+}
+
+pub fn merge(intervals: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+    if intervals.is_empty() {
+        return vec![];
+    }
+
+    let mut intervals = intervals;
+    let mut res: Vec<Vec<i32>> = vec![];
+
+    intervals.sort();
+
+    let mut last = intervals[0].clone();
+
+    for item in intervals.into_iter() {
+        if item[0] > last[1] {
+            res.push(last);
+            last = item;
+        } else {
+            last[1] = item[1].max(last[1]);
+        }
+    }
+
+    res.push(last);
+    res
+}
