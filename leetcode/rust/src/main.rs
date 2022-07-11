@@ -80,3 +80,18 @@ pub fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
 
     h.values().cloned().collect()
 }
+
+pub fn my_pow(x: f64, n: i32) -> f64 {
+    if n == 0 {
+        return 1.0;
+    }
+    if n % 2 == 0 {
+        my_pow(x, n / 2) * my_pow(x, n / 2)
+    } else {
+        if n > 0 {
+            x * my_pow(x, n / 2) * my_pow(x, n / 2)
+        } else {
+            (my_pow(x, n / 2) * my_pow(x, n / 2)) / x
+        }
+    }
+}
