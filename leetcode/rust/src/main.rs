@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 mod solutions;
 
 fn main() {
@@ -65,4 +67,16 @@ pub fn multiply(num1: String, num2: String) -> String {
         digits
     };
     digits.into_iter().rev().map(|d| d.to_string()).collect::<String>()
+}
+
+pub fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
+    let mut h = std::collections::HashMap::new();
+
+    for s in strs {
+        let mut key: Vec<char> = s.chars().collect();
+        key.sort();
+        h.entry(key).or_insert(vec![]).push(s);
+    }
+
+    h.values().cloned().collect()
 }
