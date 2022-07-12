@@ -585,3 +585,36 @@ var permuteUnique = function (nums) {
 
     return permute(0, remain, []);
 };
+
+/**
+ * @param {number[]} matchsticks
+ * @return {boolean}
+ */
+var makesquare = function(matchsticks) {
+    const total = matchsticks.reduce((total, length) => total + length);
+    if (total % 4 !== 0) return false;
+
+    const SQUARE_LENGTH = total / 4;
+    const dp = Array(4).fill(SQUARE_LENGTH);
+    const dfs = (pos = 0) => {
+        if (pos >= matchsticks.length) {
+            const [top, bottom, left, right] = dp;
+            return top === 0 && bottom === top && left === top && right === top;
+        }
+
+        const match = matchsticks[pos];
+        if (match > SQUARE_LENGTH) return false;
+
+        for (let index = 0; index < 4; index++) {
+            const side = dp[index];
+            if (match > side) continue;
+            dp[index] -= match;
+            if (dfs(pos + 1)) return true;
+            dp[index] = side;
+        }
+        return false;
+    };
+
+    matchsticks.sort((a, b) => b - a);
+    return dfs();
+};
